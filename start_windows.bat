@@ -1,0 +1,3 @@
+@echo off
+echo 正在启动钢铁缺陷检测系统...
+start steel_defect.exe
