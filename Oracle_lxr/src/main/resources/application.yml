@@ -1,0 +1,59 @@
+server:
+  port: 9090
+#  ssl:
+#    # 证书文件名
+#    key-store: classpath:test.p12
+#    # 证书密钥别名
+#    key-alias: myhttps
+#    # 密钥口令
+#    key-store-password: 123456
+
+# 数据库配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root   #你本地的数据库用户名
+#    password: 12138 #你本地的数据库密码
+    password: "aprilmay10086"    #服务器的数据库密码
+    url: jdbc:mysql://localhost:3306/jgw?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 50
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      idle-timeout: 600000
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# 配置mybatis实体和xml映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 分页
+#pagehelper:
+#  helper-dialect: mysql
+#  reasonable: true
+#  support-methods-arguments: true
+#  params: count=countSql
+
+#ip: localhost
+ip: localhost
+
+# 甲骨文：Python 子进程。不配置 jgw.home 时，自动取「启动目录的上一级」（Oracle_lxr 与 scripts 的同级目录）。
+# AutoDL 示例（取消注释并改成你的路径）：
+# jgw:
+#   home: /root/jgw
+#   python-exe: /root/miniconda3/envs/jgw/bin/python
+#   shibie-script: /root/jgw/former/shibie.py
+#   shibie-model: /root/jgw/former/mbnet.pkl
+jgw:
+  python-exe: python
+
+

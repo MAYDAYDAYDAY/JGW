@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MessageMapper">
+
+    <sql id="Base_Column_List">
+        messageID,sessionID,content,timePoint,who
+    </sql>
+    <update id="updateById" parameterType="com.example.entity.Message">
+        update message
+        <set>
+            <if test="sessionID != null">sessionID = #{sessionID},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="timePoint != null">timePoint = #{timePoint},</if>
+            <if test="who != null">who = #{who},</if>
+        </set>
+        where messageID = #{messageID}
+    </update>
+
+    <insert id="insert" parameterType="com.example.entity.Message" useGeneratedKeys="true">
+        insert into message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="messageID != null">messageID,</if>
+            <if test="sessionID != null">sessionID,</if>
+            <if test="content != null">content,</if>
+            <if test="timePoint != null">timePoint,</if>
+            <if test = "who != null">who,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="messageID != null">#{messageID},</if>
+            <if test="sessionID != null">#{sessionID},</if>
+            <if test="content != null">#{content},</if>
+            <if test="timePoint != null">#{timePoint},</if>
+            <if test = "who != null">#{who},</if>
+        </trim>
+    </insert>
+
+<!--    <select id="selectBySessionId" resultType="com.example.entity.Message">-->
+<!--        SELECT messageID, sessionID, content, who, timePoint-->
+<!--        from message-->
+<!--        where sessionID = #{sessionID}-->
+<!--    </select>-->
+
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PicHistoryMapper">
+
+    <sql id="Base_Column_List">
+        id,picID,picUrl,stars,time
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.PicHistory">
+        select
+        <include refid="Base_Column_List" />
+        from pichistory
+    </select>
+
+    <select id="selectByPicId" resultType="com.example.entity.PicHistory">
+        select
+        <include refid="Base_Column_List" />
+        from pichistory
+        where picID = #{picID}
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.PicHistory">
+        select
+        <include refid="Base_Column_List" />
+        from pichistory
+        where id = #{id}
+    </select>
+
+    <delete id="deleteByPicId">
+        delete from pichistory
+        where picID = #{picID}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.PicHistory" useGeneratedKeys="true">
+        insert into pichistory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="picID != null">picID,</if>
+            <if test="picUrl != null">picUrl,</if>
+            <if test="stars != null">stars,</if>
+            <if test="time != null">time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="picID != null">#{picID},</if>
+            <if test="picUrl != null">#{picUrl},</if>
+            <if test="stars != null">#{stars},</if>
+            <if test="time != null">#{time},</if>
+        </trim>
+    </insert>
+
+    <update id="updateByPicId" parameterType="com.example.entity.PicHistory">
+        update pichistory
+        <set>
+            <if test="picUrl != null">
+                picUrl = #{picUrl},
+            </if>
+            <if test="stars != null">
+                stars = #{stars},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+        </set>
+        where picID = #{picID}
+    </update>
+
+</mapper>
